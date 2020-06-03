@@ -2,11 +2,12 @@ const express = require("express");
 const app = express();
 const Recipe = require("../models/recipe");
 
-app.get("/", (req, res) => {
+app.get("/recipe/delete", (req, res) => {
+    let objectIdToDelete = req.query.id;
     Recipe
-      .find({})
-      .then((recipes) => {
-        res.render("recipes.hbs", {recipes});
+      .findByIdAndDelete(objectIdToDelete)
+      .then((deleteRecipe) => {
+        res.redirect("/")
       })
       .catch((err) => {
         console.log(err)

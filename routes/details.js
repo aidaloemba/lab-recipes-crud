@@ -2,11 +2,12 @@ const express = require("express");
 const app = express();
 const Recipe = require("../models/recipe");
 
-app.get("/", (req, res) => {
+app.get("/recipe/details", (req, res) => {
+    let objectID = req.query.id;
     Recipe
-      .find({})
-      .then((recipes) => {
-        res.render("recipes.hbs", {recipes});
+      .findById(objectID)
+      .then((recipe) => {
+        res.render("recipe-details.hbs", {recipe})
       })
       .catch((err) => {
         console.log(err)
