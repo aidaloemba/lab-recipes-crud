@@ -8,12 +8,13 @@ const mongoose = require("mongoose");
 const MONGODB_URI = "mongodb://localhost:27017/recipe-app";
 
 const Recipe = require("./models/recipe");
+const bodyParser = require('body-parser');
 
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "views"));
 app.set("partials", path.join(__dirname, "/views/partials"));
 
-
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/", require("./routes/recipes"));
 app.use("/", require("./routes/details"));
 app.use("/", require("./routes/delete"));
